@@ -10,12 +10,12 @@ import 'package:image_picker/image_picker.dart';
 
 final String _kanit = 'Kanit';
 
-class EditProfile extends StatefulWidget {
+class EditProfile2 extends StatefulWidget {
   @override
-  _EditProfileState createState() => _EditProfileState();
+  _EditProfile2State createState() => _EditProfile2State();
 }
 
-class _EditProfileState extends State<EditProfile> {
+class _EditProfile2State extends State<EditProfile2> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();

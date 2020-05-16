@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_social/models/chat.dart';
+import 'package:flutter_social/src/pages/index.dart';
 import 'package:flutter_social/utils/colors.dart';
 import 'package:flutter_social/utils/translator.dart';
 import 'package:flutter_social/views/languages.dart';
@@ -24,10 +26,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     FeedsPage(),
-    ChatsPage(),
-    NotificationsPage(),
-    EditPage(),
-    TranslatorPage(),
+    MyApp(),
+    MyApp(),
+    EditProfile2(),
+    IndexPage(),
     EditProfile(),
   ];
 

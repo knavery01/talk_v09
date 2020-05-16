@@ -1,0 +1,4 @@
+// Agora AppId
+const APP_ID = '98495c8081ff4f01bf858d7d40635185';
+
+//998495c8081ff4f01bf858d7d40635185
