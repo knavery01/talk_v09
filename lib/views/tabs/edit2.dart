@@ -85,6 +85,18 @@ class _EditProfile2State extends State<EditProfile2> {
         });
   }
 
+  final db = Firestore.instance;
+  _updateData() async {
+    await db
+        .collection('user2')
+        .document(userID)
+        .updateData({
+      'name': nameController.text.trim(),
+      'tel': telController.text.trim(),
+    });
+  }
+
+
   @override
   void initState() {
     inputData();
@@ -214,7 +226,7 @@ class _EditProfile2State extends State<EditProfile2> {
                                 fontSize: 18.0,
                               ),
                             ),
-                            onPressed: _signout,
+                            onPressed: _updateData,
                           ),
                           decoration: BoxDecoration(
                             boxShadow: [

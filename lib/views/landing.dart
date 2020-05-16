@@ -3,6 +3,7 @@ import 'package:flutter_social/_routing/routes.dart';
 import 'package:flutter_social/utils/colors.dart';
 import 'package:flutter_social/utils/utils.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_social/views/newRegister.dart';
 
 class LandingPage extends StatelessWidget {
   @override
@@ -77,7 +78,13 @@ class LandingPage extends StatelessWidget {
       ),
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => Navigator.pushNamed(context, registerViewRoute),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RegisterPage(),
+              ));
+        },
         color: Colors.white,
         shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(7.0),

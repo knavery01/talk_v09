@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_social/models/chat.dart';
+import 'package:flutter_social/models/slide.dart';
 import 'package:flutter_social/src/pages/index.dart';
 import 'package:flutter_social/utils/colors.dart';
 import 'package:flutter_social/utils/translator.dart';
@@ -98,8 +99,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
 
     return Scaffold(
-      bottomNavigationBar: bottomNavBar,
-      body: _pages[_currentIndex]
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('Home Screen'),
+            ],
+          )
+      ),
+      drawer: SideMenu(),
 
     );
 

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_social/models/chat.dart';
+import 'package:flutter_social/models/slide.dart';
 
 
 import 'package:flutter_social/src/pages/call.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: new MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -41,15 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      drawer: SideMenu(),
       appBar: new AppBar(
-        title: new Text("Translator"),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.search),
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => LanguagesPage()));
-              }
-          ),
-        ],
+        title: new Text("User"),
       ),
       body: ListPage(),
     );
@@ -270,13 +266,10 @@ class _DetailPageState extends State<DetailPage> {
                                   ));
                             }),
                             IconButton(icon: Icon(Icons.call),highlightColor: Color(0xffFFECDD), onPressed: (){
-                              _call();
-                              onJoin();
-                            }),
-                            IconButton(icon: Icon(Icons.assignment),highlightColor: Color(0xffFFECDD), onPressed: (){
-                              Navigator.push(context,
+                              Navigator.push(
+                                  context,
                                   MaterialPageRoute(
-                                    builder: (context) => Review(),
+                                    builder: (context) => CallPage(channelName: widget.post.data['uid']),
                                   ));
                             }),
                           ],
@@ -303,26 +296,7 @@ class _DetailPageState extends State<DetailPage> {
               SizedBox(
                 height: 24,
               ),
-              SingleChildScrollView(
-                child: Container(
-                  child: Column(
-                    children: <Widget>[
-                      TextField(
-                        controller: writeCon,
-                        decoration: InputDecoration(
-                          labelText: "Write",
-                        ),
-                      ),
-                      RaisedButton(
-                        child: Text("Post"),
-                        onPressed: (){
-                          _updateData();
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+
             ],
           ),
         ),

@@ -2,9 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social/_routing/routes.dart';
 import 'package:flutter_social/utils/colors.dart';
-import 'package:flutter_social/views/home.dart';
+
+import 'package:flutter_social/views/newRegister.dart';
+
 import 'package:line_icons/line_icons.dart';
 import 'package:flutter/services.dart';
+
+import 'tabs/notifications.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -35,7 +39,11 @@ class _LoginPageState extends State<LoginPage> {
     ).then((user) {
       //print("signed in ${user.email}");
       checkAuth(context);
-      Navigator.pushNamed(context, languagesViewRoute);// add here
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MyApp(),
+          ));// add here
     }).catchError((error) {
       print(error.message);
       scaffoldKey.currentState.showSnackBar(SnackBar(
@@ -186,7 +194,13 @@ class _LoginPageState extends State<LoginPage> {
     final newUser = Padding(
       padding: EdgeInsets.only(top: 20.0),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, registerViewRoute),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RegisterPage(),
+              ));
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
