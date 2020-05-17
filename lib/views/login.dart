@@ -60,7 +60,11 @@ class _LoginPageState extends State<LoginPage> {
     FirebaseUser user = await _auth.currentUser();
     if (user != null) {
       print("Already singed-in with");
-      Navigator.pushNamed(context, homeViewRoute);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MyApp(),
+          ));
     }
   }
 

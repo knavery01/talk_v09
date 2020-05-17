@@ -9,7 +9,7 @@ import 'package:flutter_social/views/login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'aaa.dart';
+import 'updateInfo.dart';
 
 
 
@@ -29,8 +29,13 @@ class _EditProfileState extends State<EditProfile> {
   String image;
   String userID = '';
   List<DocumentSnapshot> snapshots;
-  String img, name, tel, email;
+  String img, name, tel, email,status;
   NewUpdateInfo updateInfo = new NewUpdateInfo();
+
+
+  List catData; //collect data for dropdown
+  List<DropdownMenuItem<String>> catToDo = []; //bring data to dropdown
+  String catDataSelected; // keep data for dropdown select
 
   inputData() async {
     FirebaseAuth auth = FirebaseAuth.instance;
@@ -132,10 +137,31 @@ class _EditProfileState extends State<EditProfile> {
   void initState() {
     inputData();
     super.initState();
+
+    catData = [
+      'online',
+      'offline',
+    ];
+    for (int i = 0; i < catData.length; i++) {
+      catToDo.add(
+        DropdownMenuItem(
+          child: Text(
+            catData[i],
+            style: TextStyle(
+              color: Colors.blueGrey[300],
+            ),
+          ),
+          value: catData[i],
+        ),
+      );
+    }
+    //catDataSelected = catData[0];
   }
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -157,13 +183,33 @@ class _EditProfileState extends State<EditProfile> {
             name: snapshot.data['name'],
             img: snapshot.data['imgProfile'],
             tel: snapshot.data['tel'],
+            status: snapshot.data['status'],
           );
         },
       ),
     );
   }
 
-  Widget profile({img, name, tel, email}) {
+  Widget profile({img, name, tel, email, status}) {
+
+    final dp = Container(
+      height: 60.0,
+      color: Colors.yellow[50],
+      child: (
+          DropdownMenuItem(
+            child: DropdownButton(
+              hint: Text('Languages'),
+              items: catToDo,
+              value: catDataSelected,
+              isExpanded: true,
+              onChanged: (data) {
+                setState(() {
+                  catDataSelected = data;
+                });
+              },
+            ),
+          )),
+    );
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -215,6 +261,8 @@ class _EditProfileState extends State<EditProfile> {
               buildTextFieldName(name),
               buildTextFieldTel(tel),
               buildTextFieldEmail(email),
+              SizedBox(height: 20),
+              dp,
               SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -296,47 +344,6 @@ class _EditProfileState extends State<EditProfile> {
                             color: Colors.orange,
                           ),
                         ),
-                      ],
-                    ),
-                    SizedBox(height: 20.0,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          width: 100.0,
-                          child: MaterialButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Text(
-                              'Logout',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: _kanit,
-                                fontSize: 18.0,
-                              ),
-                            ),
-                            onPressed: _signout,
-                          ),
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 20.0,
-                                // has the effect of softening the shadow
-                                spreadRadius: 4.0,
-                                // has the effect of extending the shadow
-                                offset: Offset(
-                                  8.0, // horizontal, move right 10
-                                  8.0, // vertical, move down 10
-                                ),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.red,
-                          ),
-                        ),
-
                       ],
                     ),
                     SizedBox(height: 20.0,),
